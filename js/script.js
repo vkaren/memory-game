@@ -19,7 +19,12 @@ function loadCards() {
   let i = 0;
   while (i < 36) {
     container.innerHTML += `
-      <button id='card-${i}'>${values[i]}</button>
+      <button id='card-${i}'>
+        <div class='front'></div>
+        <div class='back'>
+          ${values[i]}
+        </div>
+      </button>
     `;
     i++;
   }
