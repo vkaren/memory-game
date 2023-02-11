@@ -43,7 +43,7 @@ button[id^="card"] .front{
   background: yellow;
   z-index: 3;
 }
-button[id^="card"]:hover .front{
+button[id^="card"].hover .front{
   transform: rotateY(180deg);
 }
 button[id^="card"] .back{
@@ -51,7 +51,7 @@ button[id^="card"] .back{
   background: rgb(255, 136, 0);
   z-index: 1;
 }
-button[id^="card"]:hover .back{
+button[id^="card"].hover .back, button[id^="card"].selected .back{
   z-index: 6;
 transform: rotateY(0deg);
 }

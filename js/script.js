@@ -28,9 +28,11 @@ function loadCards() {
     `;
     i++;
   }
-  cardsEvent((card) =>
-card.addEventListener("click", onClickCard)
-);
+  cardsEvent((card) => {
+    card.addEventListener("mouseover", onMouseOver);
+    card.addEventListener("mouseout", onMouseOut);
+    card.addEventListener("click", onClickCard);
+  });
 }
 loadCards();
 
@@ -38,10 +40,11 @@ let previousCardRevealed = null;
 function onClickCard(event) {
   let currCardRevealed = event.currentTarget;
 
-  console.log(currCardRevealed, previousCardRevealed);
+  currCardRevealed.classList.add("selected");
+
   if (previousCardRevealed) {
     changeStateCards();
-
+  
     if (
       previousCardRevealed.innerText === currCardRevealed.innerText &&
       previousCardRevealed.id !== currCardRevealed.id
@@ -53,19 +56,43 @@ function onClickCard(event) {
         changeStateCards();
       }, 3000);
     } else {
-      previousCardRevealed = null;
-      setTimeout(changeStateCards, 3000);
+      setTimeout(() => {
+        previousCardRevealed.classList.remove("selected");
+        currCardRevealed.classList.remove("selected");
+        previousCardRevealed = null;
+        changeStateCards();
+      }, 3000);
     }
   } else {
     previousCardRevealed = currCardRevealed;
   }
 }
 
+function onMouseOver(event) {
+  const card = event.currentTarget;
+  card.classList.add("hover");
+}
+
+function onMouseOut(event) {
+  const card = event.currentTarget;
+  card.classList.remove("hover");
+}
+
 function changeStateCards() {
-  cardsEvent((card) => (card.disabled = !card.disabled))
+  cardsEvent((card) => {
+    card.disabled = !card.disabled;
+    if (card.disabled) {
+      card.classList.remove("hover");
+        card.removeEventListener("mouseover", onMouseOver);
+        card.removeEventListener("mouseout", onMouseOut);
+  
+    } else {
+        card.addEventListener("mouseover", onMouseOver);
+        card.addEventListener("mouseout", onMouseOut);
+
+    }
+  });
 }
 function cardsEvent(fn) {
-    Object.values(container.children).forEach(fn)
-  }
-  
-  
+  Object.values(container.children).forEach(fn);
+}
