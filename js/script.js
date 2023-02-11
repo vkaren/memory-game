@@ -1,0 +1,66 @@
+const container = document.getElementById("container-cards");
+const buttonPlayAgain = document.getElementById("play-again");
+buttonPlayAgain.style.display = "none";
+let values = [];
+
+function randomCardsValues() {
+  while (values.length < 36) {
+    let randomNum = Math.floor(Math.random() * (18 - 1 + 1)) + 1;
+    let index = values.indexOf(randomNum);
+
+    if (index === -1 || values.indexOf(randomNum, index + 1) === -1) {
+      values.push(randomNum);
+    }
+  }
+}
+randomCardsValues();
+
+function loadCards() {
+  let i = 0;
+  while (i < 36) {
+    container.innerHTML += `
+      <button id='card-${i}'>${values[i]}</button>
+    `;
+    i++;
+  }
+  cardsEvent((card) =>
+card.addEventListener("click", onClickCard)
+);
+}
+loadCards();
+
+let previousCardRevealed = null;
+function onClickCard(event) {
+  let currCardRevealed = event.currentTarget;
+
+  console.log(currCardRevealed, previousCardRevealed);
+  if (previousCardRevealed) {
+    changeStateCards();
+
+    if (
+      previousCardRevealed.innerText === currCardRevealed.innerText &&
+      previousCardRevealed.id !== currCardRevealed.id
+    ) {
+      setTimeout(() => {
+        currCardRevealed.classList.add("found");
+        previousCardRevealed.classList.add("found");
+        previousCardRevealed = null;
+        changeStateCards();
+      }, 3000);
+    } else {
+      previousCardRevealed = null;
+      setTimeout(changeStateCards, 3000);
+    }
+  } else {
+    previousCardRevealed = currCardRevealed;
+  }
+}
+
+function changeStateCards() {
+  cardsEvent((card) => (card.disabled = !card.disabled))
+}
+function cardsEvent(fn) {
+    Object.values(container.children).forEach(fn)
+  }
+  
+  
