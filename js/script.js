@@ -1,6 +1,6 @@
 const container = document.getElementById("container-cards");
 const buttonPlayAgain = document.getElementById("play-again");
-buttonPlayAgain.style.display = "none";
+
 let values = [];
 
 function randomCardsValues() {
@@ -16,6 +16,7 @@ function randomCardsValues() {
 randomCardsValues();
 
 function loadCards() {
+  buttonPlayAgain.style.display = "none";
   let i = 0;
   while (i < 36) {
     container.innerHTML += `
@@ -50,22 +51,39 @@ function onClickCard(event) {
       previousCardRevealed.id !== currCardRevealed.id
     ) {
       setTimeout(() => {
+
+        availablesCards(currCardRevealed.innerText)
         currCardRevealed.classList.add("found");
         previousCardRevealed.classList.add("found");
         previousCardRevealed = null;
         changeStateCards();
-      }, 3000);
+      }, 1000);
     } else {
       setTimeout(() => {
         previousCardRevealed.classList.remove("selected");
         currCardRevealed.classList.remove("selected");
         previousCardRevealed = null;
         changeStateCards();
-      }, 3000);
+      }, 1000);
     }
   } else {
     previousCardRevealed = currCardRevealed;
   }
+}
+
+function availablesCards(card){
+ let firstCard = values.indexOf(card)
+ let secondCard = values.indexOf(card, firstCard+1)
+
+ values.splice(0)
+ //values.splice(firstCard,1)
+// values.splice(secondCard-1,1)
+console.log(values)
+ if(values.length === 0){
+  console.log(buttonPlayAgain.style.display)
+  buttonPlayAgain.style.display = "inline-block";
+  console.log(buttonPlayAgain.style.display)
+ }
 }
 
 function onMouseOver(event) {
