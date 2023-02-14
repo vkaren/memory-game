@@ -62,3 +62,14 @@ button[id^="card"]:disabled{
 button[id^="card"].found{
     visibility: hidden;
 }
+button[id^="play-again"]{
+  position: absolute;
+left: 45%;
+z-index: 10;
+visibility: hidden;
+opacity: 0;
+}
+button[id^="play-again"].visible{
+visibility:visible;
+opacity: 1;
+}

@@ -1,5 +1,6 @@
 const container = document.getElementById("container-cards");
 const buttonPlayAgain = document.getElementById("play-again");
+//buttonPlayAgain.style.display = "none";
 
 let values = [];
 
@@ -13,10 +14,9 @@ function randomCardsValues() {
     }
   }
 }
-randomCardsValues();
 
 function loadCards() {
-  buttonPlayAgain.style.display = "none";
+  randomCardsValues();
   let i = 0;
   while (i < 36) {
     container.innerHTML += `
@@ -35,12 +35,10 @@ function loadCards() {
     card.addEventListener("click", onClickCard);
   });
 }
-loadCards();
 
 let previousCardRevealed = null;
 function onClickCard(event) {
   let currCardRevealed = event.currentTarget;
-
   currCardRevealed.classList.add("selected");
 
   if (previousCardRevealed) {
@@ -51,8 +49,7 @@ function onClickCard(event) {
       previousCardRevealed.id !== currCardRevealed.id
     ) {
       setTimeout(() => {
-
-        availablesCards(currCardRevealed.innerText)
+       availablesCards(currCardRevealed.innerText)
         currCardRevealed.classList.add("found");
         previousCardRevealed.classList.add("found");
         previousCardRevealed = null;
@@ -78,11 +75,8 @@ function availablesCards(card){
  values.splice(0)
  //values.splice(firstCard,1)
 // values.splice(secondCard-1,1)
-console.log(values)
  if(values.length === 0){
-  console.log(buttonPlayAgain.style.display)
-  buttonPlayAgain.style.display = "inline-block";
-  console.log(buttonPlayAgain.style.display)
+  buttonPlayAgain.style.color = 'white'
  }
 }
 
@@ -100,7 +94,7 @@ function changeStateCards() {
   cardsEvent((card) => {
     card.disabled = !card.disabled;
     if (card.disabled) {
-      card.classList.remove("hover");
+        card.classList.remove("hover");
         card.removeEventListener("mouseover", onMouseOver);
         card.removeEventListener("mouseout", onMouseOut);
   
@@ -112,5 +106,12 @@ function changeStateCards() {
   });
 }
 function cardsEvent(fn) {
-  Object.values(container.children).forEach(fn);
+  Object.values(container.children).forEach((card)=> {
+   if(card.id !== 'play-again' ) {
+     fn(card)
+   }
+   
+  });
 }
+
+window.addEventListener('load', loadCards)
