@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
     <title>memory game</title>
-</head>
-<body>
-    <div id="container-cards">
-       <button id="play-again">
-        Play again
-       </button>
-    </div>
+  </head>
+  <body>
+    <main>
+      <div id="select-difficulty">
+        <label for="difficulty">Difficulty</label>
+        <select name="difficulty" id="difficulty" autocomplete="off">
+          <option value="easy">Easy</option>
+          <option value="medium" selected>Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+      </div>
+      <div id="container-cards"></div>
+      <button id="play-again">Play again</button>
+    </main>
+
     <script src="./js/script.js"></script>
-</body>
+  </body>
 </html>

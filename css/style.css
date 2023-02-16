@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Signika+Negative&display=swap');
 html,
 body {
   height: 100vh;
@@ -8,15 +9,41 @@ body {
   display: flex;
 justify-content: center;
 align-items: center;
+flex-direction: column;
+background-color: #61D4B3;
+font-family: 'Fredoka One', cursive;
 }
-#container-cards {
-  display: grid;
-  grid-template-columns: repeat(6, 15%);
+main {
+  width: 50vw;
+  height: 80vh;
+padding: 1em;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1em;
+  background-color: #FDD365;
+  border-radius: 12px;
+  }
+#select-difficulty {
+  margin-right: 70%;
+  }
+  select {
+    background: transparent;
+border: 2px solid #FD2EB3;
+border-radius: 5px;
+    font-family: 'Signika Negative', sans-serif;
+  }
+#container-cards {
+  display: grid;
+
+  justify-content: center;
+  align-content: center;
   grid-gap: 0.5em;
-  width: 80%;
-  height: 80vh;
+  width: 100%;
+height: 100%;
+
+
 }
 button[id^="card"] {
 display: flex;
@@ -37,18 +64,24 @@ button[id^="card"] .front,button[id^="card"] .back{
   transform-style: preserve-3d;
   backface-visibility: hidden;
   transition: all 0.4s ease-in-out;
+  border-radius: 5px;
+  font-family: 'Fredoka One', cursive;
 }
 button[id^="card"] .front{
   transform: rotateX(0deg) rotateY(0deg);
-  background: yellow;
+  background: #FB8D62;
   z-index: 3;
 }
 button[id^="card"].hover .front{
   transform: rotateY(180deg);
 }
 button[id^="card"] .back{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transform:rotateX(0deg) rotateY(180deg);
-  background: rgb(255, 136, 0);
+  background: #FD2EB3;
+  color: white;
   z-index: 1;
 }
 button[id^="card"].hover .back, button[id^="card"].selected .back{
@@ -64,12 +97,37 @@ button[id^="card"].found{
 }
 button[id^="play-again"]{
   position: absolute;
-left: 45%;
+  left: 40%;
+  width: 10em;
+  padding: 1em;
+  top: 48%;
+  background: #adffe8;
 z-index: 10;
-visibility: hidden;
+visibility:hidden;
 opacity: 0;
+border: 3px solid #FD2EB3;
+border-radius: 10px;
+font-family: 'Fredoka One', cursive;
+cursor:pointer;
+}
+button[id^="play-again"]:hover{
+  border: 3px solid #ff50c2;
+  background: #77ffd8;
 }
 button[id^="play-again"].visible{
 visibility:visible;
 opacity: 1;
+}
+
+@media (max-width: 650px) {
+  main {
+    width: 85vw;
+    height: 50vh;
+    }
+}
+@media (max-width: 800px) {
+  main {
+    width: 85vw;
+    height: 60vh;
+    }
 }
