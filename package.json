@@ -1,0 +1,12 @@
+{
+  "name": "memory-game",
+  "version": "1.0.0",
+  "description": "Memory game",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [
+    "javascript"
+  ],
+  "author": "Karen Varela",
+  "license": "MIT"
+}
