@@ -176,5 +176,3 @@ MemoryGame.prototype.reset = function () {
   this.availableCards = [];
   this.firstChosenCard = null;
 };
-
-Object.freeze(MemoryGame);
