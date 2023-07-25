@@ -57,10 +57,10 @@ main {
   gap: 1em;
   width: 70vw;
   height: 70vw;
-  max-width: 50rem;
-  max-height: 50rem;
-  min-width: 320px;
-  min-height: 320px;
+  max-width: 60rem;
+  max-height: 60rem;
+  min-width: 32rem;
+  min-height: 40rem;
   padding: 2.5rem;
   border-radius: 12px;
   background-color: var(--yellow);

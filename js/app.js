@@ -160,7 +160,13 @@ MemoryGame.prototype.updateAvailableCards = function (cardToRemove) {
 
 MemoryGame.prototype.changeStateOfCards = function () {
   [...this.cardsContainer.children].forEach((cardElem) => {
-    cardElem.disabled = !cardElem.disabled;
+    let isDisabled = !cardElem.disabled;
+
+    if (isDisabled) {
+      cardElem.classList.remove("hover");
+    }
+
+    cardElem.disabled = isDisabled;
   });
 };
 
