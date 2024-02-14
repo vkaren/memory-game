@@ -28,6 +28,13 @@ MemoryGame.prototype.selectLevel = function (e) {
   this.start();
 };
 
+MemoryGame.prototype.reset = function () {
+  this.playAgainBtn.classList.remove("visible");
+  this.cardsContainer.innerHTML = "";
+  this.availableCards = [];
+  this.firstChosenCard = null;
+};
+
 MemoryGame.prototype.start = function () {
   // Get card values
   this.getCards();
@@ -168,11 +175,4 @@ MemoryGame.prototype.changeStateOfCards = function () {
 
     cardElem.disabled = isDisabled;
   });
-};
-
-MemoryGame.prototype.reset = function () {
-  this.playAgainBtn.classList.remove("visible");
-  this.cardsContainer.innerHTML = "";
-  this.availableCards = [];
-  this.firstChosenCard = null;
 };
