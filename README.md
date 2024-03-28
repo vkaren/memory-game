@@ -16,6 +16,8 @@ The start game method is responsible for getting the card values and creating th
 
 <img src="./readme_imgs/start.PNG" width="600px">
 
+<img src="./readme_imgs/getCards.PNG" width="600px">
+
 When an user clicks on a card, the game checks if there is already a chosen card. If not, the clicked card becomes the first chosen card. If there is a chosen card, all cards are temporarily disabled. The game then validates if the first chosen card is equal to the second chosen card. Depending on this validation, either the cardsFound or cardsNotFound function will be invoked.
 
 <img src="./readme_imgs/onClick.PNG" width="600px">

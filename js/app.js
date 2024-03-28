@@ -55,20 +55,23 @@ MemoryGame.prototype.start = function () {
 };
 
 MemoryGame.prototype.getCards = function () {
-  while (this.availableCards.length < this.currentLevel) {
-    let randomNum =
-      Math.floor(Math.random() * (this.currentLevel / 2 - 1 + 1)) + 1;
+  const numbers = [];
 
-    let indexAddedFirst = this.availableCards.indexOf(randomNum);
-    let indexAddedSecond = this.availableCards.indexOf(
-      randomNum,
-      indexAddedFirst + 1
-    );
-
-    if (indexAddedFirst < 0 || indexAddedSecond < 0) {
-      this.availableCards.push(randomNum);
-    }
+  for (let i = 1; i <= this.currentLevel / 2; i++) {
+    numbers.push(i);
+    numbers.push(i);
   }
+
+  for (let j = 0; j < numbers.length; j++) {
+    const randomPosition = Math.floor(Math.random() * (j + 1));
+
+    [numbers[j], numbers[randomPosition]] = [
+      numbers[randomPosition],
+      numbers[j],
+    ];
+  }
+
+  this.availableCards = numbers;
 };
 
 MemoryGame.prototype.createCardElem = function (id, value) {
@@ -115,14 +118,17 @@ MemoryGame.prototype.onClickCard = function (e) {
     let firstChosenCardValue = this.firstChosenCard.innerText;
     let firstChosenCardId = this.firstChosenCard.id;
 
-    let chosenCardValue = chosenCard.innerText;
-    let chosenCardId = chosenCard.id;
+    let secondChosenCardValue = chosenCard.innerText;
+    let secondChosenCardId = chosenCard.id;
 
     if (
-      firstChosenCardValue === chosenCardValue &&
-      firstChosenCardId !== chosenCardId
+      firstChosenCardValue === secondChosenCardValue &&
+      firstChosenCardId !== secondChosenCardId
     ) {
-      setTimeout(() => this.cardsFound(chosenCard, chosenCardValue), 1000);
+      setTimeout(
+        () => this.cardsFound(chosenCard, secondChosenCardValue),
+        1000
+      );
     } else {
       setTimeout(() => this.cardsNotFound(chosenCard), 1000);
     }
